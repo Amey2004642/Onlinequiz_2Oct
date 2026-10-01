@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz on Gandhi Ji – 2nd October 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f9f6f0 0%, #f0ebe1 100%);
+            padding: 2rem 1rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .quiz-container {
+            max-width: 850px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2), 0 8px 24px -6px rgba(0, 0, 0, 0.1);
+            padding: 2rem 2rem 2.5rem;
+            border: 1px solid #e8dcc8;
+            margin-bottom: 1.5rem;
+        }
+
+        .heading {
+            text-align: center;
+            border-bottom: 3px dashed #c9a96e;
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .heading h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #2d4a2d;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .heading h1 span {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #6b4f2c;
+            margin-top: 10px;
+            letter-spacing: 0.4px;
+            background: #fdf7ed;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem 2rem;
+            background: #f5efe4;
+            padding: 0.9rem 1.5rem;
+            border-radius: 60px;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #3e2e1c;
+            border: 1px solid #dfd2be;
+        }
+
+        .meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .meta i {
+            font-style: normal;
+            font-size: 1.1rem;
+        }
+
+        .questions {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .question-item {
+            background: #fefcf9;
+            border-left: 6px solid #c9a96e;
+            padding: 1rem 1.2rem 1rem 1.4rem;
+            border-radius: 14px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            transition: 0.15s ease;
+        }
+
+        .question-item.correct-highlight {
+            border-left-color: #2d8f4e;
+            background: #f1faf3;
+        }
+
+        .question-item.wrong-highlight {
+            border-left-color: #c0392b;
+            background: #fdf3f2;
+        }
+
+        .q-text {
+            font-weight: 600;
+            color: #1e3a2e;
+            font-size: 1.02rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .q-num {
+            display: inline-block;
+            background: #2d4a2d;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            border-radius: 30px;
+            flex-shrink: 0;
+            margin-right: 4px;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.8rem;
+            padding-left: 2.2rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.98rem;
+            color: #2f2f2f;
+        }
+
+        .option input[type="radio"] {
+            accent-color: #2d6a4f;
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+        }
+
+        .option label {
+            cursor: pointer;
+        }
+
+        .btn-wrapper {
+            margin-top: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: #2d6a4f;
+            color: #fff;
+            border: none;
+            padding: 1rem 3.2rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s ease;
+            box-shadow: 0 8px 18px -6px rgba(45, 106, 79, 0.5);
+            border: 1px solid #1f4d38;
+        }
+
+        .submit-btn:hover {
+            background: #1f4d38;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px -8px rgba(45, 106, 79, 0.6);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px -4px rgba(45, 106, 79, 0.4);
+        }
+
+        .result-box {
+            display: none;
+            background: #f4fbf7;
+            border: 2px solid #2d6a4f;
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: fadeUp 0.4s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-box .score {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1e3a2e;
+            line-height: 1.2;
+        }
+
+        .result-box .score small {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #4a5e50;
+        }
+
+        .result-box .message {
+            font-size: 1.1rem;
+            color: #3d5546;
+            margin: 0.6rem 0 1rem;
+            font-weight: 500;
+        }
+
+        .participation-code {
+            background: #2d4a2d;
+            color: #f9e7b3;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 0.6rem 0 1rem;
+            font-family: monospace;
+        }
+
+        .screenshot-note {
+            background: #fff6e0;
+            border-left: 5px solid #e6a817;
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.98rem;
+            color: #4d3a1a;
+            text-align: left;
+            margin: 0.8rem 0 0.4rem;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .screenshot-note strong {
+            color: #1e3a2e;
+        }
+
+        .footer {
+            width: 100%;
+            max-width: 850px;
+            margin-top: 0.5rem;
+            padding: 1.5rem 1rem 2rem;
+            text-align: center;
+            border-top: 1px solid #d9cdb8;
+            color: #3e2e1c;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .footer .powered {
+            font-size: 1rem;
+            color: #3e2e1c;
+        }
+
+        .footer .powered strong {
+            color: #1f3b2c;
+            font-weight: 700;
+            background: #e8dfd1;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            display: inline-block;
+        }
+
+        .footer .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4rem 1.4rem;
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .footer .links a {
+            color: #1f4d38;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1.5px dotted #a8c0a8;
+            padding-bottom: 1px;
+            transition: 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .footer .links a:hover {
+            color: #0f2e1f;
+            border-bottom-color: #1f4d38;
+        }
+
+        .footer .divider {
+            color: #b8a88a;
+            font-weight: 300;
+            user-select: none;
+        }
+
+        @media (max-width: 550px) {
+            .quiz-container {
+                padding: 1.5rem 1rem 2rem;
+            }
+            .heading h1 {
+                font-size: 1.6rem;
+            }
+            .meta {
+                gap: 0.8rem;
+                font-size: 0.85rem;
+                padding: 0.7rem 1rem;
+            }
+            .options {
+                padding-left: 0.8rem;
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+            .q-text {
+                font-size: 0.95rem;
+            }
+            .option {
+                font-size: 0.92rem;
+            }
+            .submit-btn {
+                padding: 0.9rem 2.2rem;
+                font-size: 1rem;
+            }
+            .result-box .score {
+                font-size: 1.8rem;
+            }
+            .participation-code {
+                font-size: 1.1rem;
+                padding: 0.5rem 1.2rem;
+            }
+            .footer .links {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            .footer .divider {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <!-- Heading -->
+    <div class="heading">
+        <h1>
+            Quiz on 2nd October 2026
+            <span>🕊️ Mahatma Gandhi – Father of the Nation 🕊️</span>
+        </h1>
+    </div>
+
+    <!-- Meta info -->
+    <div class="meta">
+        <span><i>📋</i> Total Questions: 20</span>
+        <span><i>🔘</i> Type: Multiple Choice</span>
+        <span><i>🏆</i> Marks: 20</span>
+        <span><i>⏳</i> Time: 10–15 minutes</span>
+    </div>
+
+    <!-- Questions Form -->
+    <form id="quizForm">
+        <div class="questions" id="questionsContainer">
+
+            <!-- 1 -->
+            <div class="question-item" data-q="1">
+                <div class="q-text"><span class="q-num">1</span> When is Gandhi Jayanti celebrated?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q1" value="A" id="q1a"><label for="q1a">A) 15 August</label></div>
+                    <div class="option"><input type="radio" name="q1" value="B" id="q1b"><label for="q1b">B) 2 October</label></div>
+                    <div class="option"><input type="radio" name="q1" value="C" id="q1c"><label for="q1c">C) 26 January</label></div>
+                    <div class="option"><input type="radio" name="q1" value="D" id="q1d"><label for="q1d">D) 14 November</label></div>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="question-item" data-q="2">
+                <div class="q-text"><span class="q-num">2</span> What is the full name of Mahatma Gandhi?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q2" value="A" id="q2a"><label for="q2a">A) Mohandas Karamchand Gandhi</label></div>
+                    <div class="option"><input type="radio" name="q2" value="B" id="q2b"><label for="q2b">B) Mohanlal Gandhi</label></div>
+                    <div class="option"><input type="radio" name="q2" value="C" id="q2c"><label for="q2c">C) Mohandas Jawaharlal Gandhi</label></div>
+                    <div class="option"><input type="radio" name="q2" value="D" id="q2d"><label for="q2d">D) Karamchand Mohan Gandhi</label></div>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="question-item" data-q="3">
+                <div class="q-text"><span class="q-num">3</span> Where was Mahatma Gandhi born?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q3" value="A" id="q3a"><label for="q3a">A) Ahmedabad</label></div>
+                    <div class="option"><input type="radio" name="q3" value="B" id="q3b"><label for="q3b">B) Mumbai</label></div>
+                    <div class="option"><input type="radio" name="q3" value="C" id="q3c"><label for="q3c">C) Porbandar</label></div>
+                    <div class="option"><input type="radio" name="q3" value="D" id="q3d"><label for="q3d">D) Rajkot</label></div>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="question-item" data-q="4">
+                <div class="q-text"><span class="q-num">4</span> In which year was Mahatma Gandhi born?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q4" value="A" id="q4a"><label for="q4a">A) 1865</label></div>
+                    <div class="option"><input type="radio" name="q4" value="B" id="q4b"><label for="q4b">B) 1869</label></div>
+                    <div class="option"><input type="radio" name="q4" value="C" id="q4c"><label for="q4c">C) 1872</label></div>
+                    <div class="option"><input type="radio" name="q4" value="D" id="q4d"><label for="q4d">D) 1880</label></div>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="question-item" data-q="5">
+                <div class="q-text"><span class="q-num">5</span> Which principle was strongly associated with Mahatma Gandhi's freedom movement?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q5" value="A" id="q5a"><label for="q5a">A) Violence</label></div>
+                    <div class="option"><input type="radio" name="q5" value="B" id="q5b"><label for="q5b">B) Satyagraha</label></div>
+                    <div class="option"><input type="radio" name="q5" value="C" id="q5c"><label for="q5c">C) Militarism</label></div>
+                    <div class="option"><input type="radio" name="q5" value="D" id="q5d"><label for="q5d">D) Colonialism</label></div>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="question-item" data-q="6">
+                <div class="q-text"><span class="q-num">6</span> What does "Ahimsa" mean?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q6" value="A" id="q6a"><label for="q6a">A) Truth</label></div>
+                    <div class="option"><input type="radio" name="q6" value="B" id="q6b"><label for="q6b">B) Freedom</label></div>
+                    <div class="option"><input type="radio" name="q6" value="C" id="q6c"><label for="q6c">C) Non‑violence</label></div>
+                    <div class="option"><input type="radio" name="q6" value="D" id="q6d"><label for="q6d">D) Sacrifice</label></div>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="question-item" data-q="7">
+                <div class="q-text"><span class="q-num">7</span> Which movement was launched by Gandhi in 1930 against the British salt tax?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q7" value="A" id="q7a"><label for="q7a">A) Quit India Movement</label></div>
+                    <div class="option"><input type="radio" name="q7" value="B" id="q7b"><label for="q7b">B) Dandi March (Salt Satyagraha)</label></div>
+                    <div class="option"><input type="radio" name="q7" value="C" id="q7c"><label for="q7c">C) Non‑Cooperation Movement</label></div>
+                    <div class="option"><input type="radio" name="q7" value="D" id="q7d"><label for="q7d">D) Khilafat Movement</label></div>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="question-item" data-q="8">
+                <div class="q-text"><span class="q-num">8</span> In which country did Mahatma Gandhi first experiment with Satyagraha?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q8" value="A" id="q8a"><label for="q8a">A) India</label></div>
+                    <div class="option"><input type="radio" name="q8" value="B" id="q8b"><label for="q8b">B) South Africa</label></div>
+                    <div class="option"><input type="radio" name="q8" value="C" id="q8c"><label for="q8c">C) England</label></div>
+                    <div class="option"><input type="radio" name="q8" value="D" id="q8d"><label for="q8d">D) Myanmar</label></div>
+                </div>
+            </div>
+
+            <!-- 9 -->
+            <div class="question-item" data-q="9">
+                <div class="q-text"><span class="q-num">9</span> What title is often given to Mahatma Gandhi in India?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q9" value="A" id="q9a"><label for="q9a">A) Iron Man of India</label></div>
+                    <div class="option"><input type="radio" name="q9" value="B" id="q9b"><label for="q9b">B) Father of the Nation</label></div>
+                    <div class="option"><input type="radio" name="q9" value="C" id="q9c"><label for="q9c">C) Netaji</label></div>
+                    <div class="option"><input type="radio" name="q9" value="D" id="q9d"><label for="q9d">D) Chacha</label></div>
+                </div>
+            </div>
+
+            <!-- 10 -->
+            <div class="question-item" data-q="10">
+                <div class="q-text"><span class="q-num">10</span> Which famous book was written by Mahatma Gandhi?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q10" value="A" id="q10a"><label for="q10a">A) Discovery of India</label></div>
+                    <div class="option"><input type="radio" name="q10" value="B" id="q10b"><label for="q10b">B) My Experiments with Truth</label></div>
+                    <div class="option"><input type="radio" name="q10" value="C" id="q10c"><label for="q10c">C) Gitanjali</label></div>
+                    <div class="option"><input type="radio" name="q10" value="D" id="q10d"><label for="q10d">D) Wings of Fire</label></div>
+                </div>
+            </div>
+
+            <!-- 11 -->
+            <div class="question-item" data-q="11">
+                <div class="q-text"><span class="q-num">11</span> What did Gandhi ji call the people of India who were untouchable?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q11" value="A" id="q11a"><label for="q11a">A) Harijans</label></div>
+                    <div class="option"><input type="radio" name="q11" value="B" id="q11b"><label for="q11b">B) Dalits</label></div>
+                    <div class="option"><input type="radio" name="q11" value="C" id="q11c"><label for="q11c">C) Shudras</label></div>
+                    <div class="option"><input type="radio" name="q11" value="D" id="q11d"><label for="q11d">D) Adivasis</label></div>
+                </div>
+            </div>
+
+            <!-- 12 -->
+            <div class="question-item" data-q="12">
+                <div class="q-text"><span class="q-num">12</span> Which movement was started by Gandhi in 1942 demanding an end to British rule?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q12" value="A" id="q12a"><label for="q12a">A) Civil Disobedience</label></div>
+                    <div class="option"><input type="radio" name="q12" value="B" id="q12b"><label for="q12b">B) Quit India Movement</label></div>
+                    <div class="option"><input type="radio" name="q12" value="C" id="q12c"><label for="q12c">C) Home Rule Movement</label></div>
+                    <div class="option"><input type="radio" name="q12" value="D" id="q12d"><label for="q12d">D) Swadeshi Movement</label></div>
+                </div>
+            </div>
+
+            <!-- 13 -->
+            <div class="question-item" data-q="13">
+                <div class="q-text"><span class="q-num">13</span> What did Gandhi ji use as a symbol of self‑reliance and simplicity?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q13" value="A" id="q13a"><label for="q13a">A) Sword</label></div>
+                    <div class="option"><input type="radio" name="q13" value="B" id="q13b"><label for="q13b">B) Charkha (spinning wheel)</label></div>
+                    <div class="option"><input type="radio" name="q13" value="C" id="q13c"><label for="q13c">C) Crown</label></div>
+                    <div class="option"><input type="radio" name="q13" value="D" id="q13d"><label for="q13d">D) Pen</label></div>
+                </div>
+            </div>
+
+            <!-- 14 -->
+            <div class="question-item" data-q="14">
+                <div class="q-text"><span class="q-num">14</span> On which date did Mahatma Gandhi pass away?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q14" value="A" id="q14a"><label for="q14a">A) 30 January 1948</label></div>
+                    <div class="option"><input type="radio" name="q14" value="B" id="q14b"><label for="q14b">B) 2 October 1948</label></div>
+                    <div class="option"><input type="radio" name="q14" value="C" id="q14c"><label for="q14c">C) 15 August 1947</label></div>
+                    <div class="option"><input type="radio" name="q14" value="D" id="q14d"><label for="q14d">D) 26 January 1950</label></div>
+                </div>
+            </div>
+
+            <!-- 15 -->
+            <div class="question-item" data-q="15">
+                <div class="q-text"><span class="q-num">15</span> What was the name of Gandhi's wife?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q15" value="A" id="q15a"><label for="q15a">A) Kasturba</label></div>
+                    <div class="option"><input type="radio" name="q15" value="B" id="q15b"><label for="q15b">B) Kamala</label></div>
+                    <div class="option"><input type="radio" name="q15" value="C" id="q15c"><label for="q15c">C) Sarojini</label></div>
+                    <div class="option"><input type="radio" name="q15" value="D" id="q15d"><label for="q15d">D) Vijaya</label></div>
+                </div>
+            </div>
+
+            <!-- 16 -->
+            <div class="question-item" data-q="16">
+                <div class="q-text"><span class="q-num">16</span> Which fast did Gandhi undertake to stop communal violence in Calcutta in 1947?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q16" value="A" id="q16a"><label for="q16a">A) 3‑day fast</label></div>
+                    <div class="option"><input type="radio" name="q16" value="B" id="q16b"><label for="q16b">B) 5‑day fast</label></div>
+                    <div class="option"><input type="radio" name="q16" value="C" id="q16c"><label for="q16c">C) 10‑day fast</label></div>
+                    <div class="option"><input type="radio" name="q16" value="D" id="q16d"><label for="q16d">D) 21‑day fast</label></div>
+                </div>
+            </div>
+
+            <!-- 17 -->
+            <div class="question-item" data-q="17">
+                <div class="q-text"><span class="q-num">17</span> Where was the Sabarmati Ashram established by Gandhi?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q17" value="A" id="q17a"><label for="q17a">A) Porbandar</label></div>
+                    <div class="option"><input type="radio" name="q17" value="B" id="q17b"><label for="q17b">B) Ahmedabad</label></div>
+                    <div class="option"><input type="radio" name="q17" value="C" id="q17c"><label for="q17c">C) Wardha</label></div>
+                    <div class="option"><input type="radio" name="q17" value="D" id="q17d"><label for="q17d">D) Mumbai</label></div>
+                </div>
+            </div>
+
+            <!-- 18 -->
+            <div class="question-item" data-q="18">
+                <div class="q-text"><span class="q-num">18</span> What did Gandhi mean by "Swaraj"?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q18" value="A" id="q18a"><label for="q18a">A) Complete independence / self‑rule</label></div>
+                    <div class="option"><input type="radio" name="q18" value="B" id="q18b"><label for="q18b">B) Foreign rule</label></div>
+                    <div class="option"><input type="radio" name="q18" value="C" id="q18c"><label for="q18c">C) Industrialisation</label></div>
+                    <div class="option"><input type="radio" name="q18" value="D" id="q18d"><label for="q18d">D) Partition</label></div>
+                </div>
+            </div>
+
+            <!-- 19 -->
+            <div class="question-item" data-q="19">
+                <div class="q-text"><span class="q-num">19</span> Which award was given to Gandhi ji by the British Government in 1915?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q19" value="A" id="q19a"><label for="q19a">A) Knighthood</label></div>
+                    <div class="option"><input type="radio" name="q19" value="B" id="q19b"><label for="q19b">B) Kaiser‑i‑Hind</label></div>
+                    <div class="option"><input type="radio" name="q19" value="C" id="q19c"><label for="q19c">C) Victoria Cross</label></div>
+                    <div class="option"><input type="radio" name="q19" value="D" id="q19d"><label for="q19d">D) Nobel Prize</label></div>
+                </div>
+            </div>
+
+            <!-- 20 -->
+            <div class="question-item" data-q="20">
+                <div class="q-text"><span class="q-num">20</span> Which international day is observed on 2nd October along with Gandhi Jayanti?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q20" value="A" id="q20a"><label for="q20a">A) World Peace Day</label></div>
+                    <div class="option"><input type="radio" name="q20" value="B" id="q20b"><label for="q20b">B) International Day of Non‑Violence</label></div>
+                    <div class="option"><input type="radio" name="q20" value="C" id="q20c"><label for="q20c">C) Human Rights Day</label></div>
+                    <div class="option"><input type="radio" name="q20" value="D" id="q20d"><label for="q20d">D) World Environment Day</label></div>
+                </div>
+            </div>
+
+        </div> <!-- questions end -->
+
+        <!-- Submit Button -->
+        <div class="btn-wrapper">
+            <button type="button" class="submit-btn" id="submitBtn">✅ Submit Quiz</button>
+        </div>
+    </form>
+
+    <!-- Result Box -->
+    <div class="result-box" id="resultBox">
+        <div class="score" id="scoreDisplay"></div>
+        <div class="message" id="messageDisplay"></div>
+        <div class="participation-code" id="participationCode"></div>
+        <div class="screenshot-note">
+            📸 <strong>Take a screenshot of your result</strong> and send it to the link forwarded to you.
+        </div>
+    </div>
+
+</div> <!-- quiz-container end -->
+
+<!-- Footer with links -->
+<div class="footer">
+    <div class="powered">Powered by <strong>Tecwithamey</strong></div>
+    <div class="links">
+        <a href="https://tecwithamey.online" target="_blank" rel="noopener">🌐 tecwithamey.online</a>
+        <span class="divider">|</span>
+        <a href="mailto:tecwithamey@gmail.com">✉️ tecwithamey@gmail.com</a>
+        <span class="divider">|</span>
+        <a href="mailto:supportteecwithamey@gmail.com">✉️ supportteecwithamey@gmail.com</a>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Correct answers mapping
+        const correctAnswers = {
+            q1: 'B',
+            q2: 'A',
+            q3: 'C',
+            q4: 'B',
+            q5: 'B',
+            q6: 'C',
+            q7: 'B',
+            q8: 'B',
+            q9: 'B',
+            q10: 'B',
+            q11: 'A',
+            q12: 'B',
+            q13: 'B',
+            q14: 'A',
+            q15: 'A',
+            q16: 'A',
+            q17: 'B',
+            q18: 'A',
+            q19: 'B',
+            q20: 'B'
+        };
+
+        const totalQuestions = 20;
+        const submitBtn = document.getElementById('submitBtn');
+        const resultBox = document.getElementById('resultBox');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const messageDisplay = document.getElementById('messageDisplay');
+        const participationCode = document.getElementById('participationCode');
+        const questionsContainer = document.getElementById('questionsContainer');
+
+        // Generate a random participation code (6 characters alphanumeric)
+        function generateCode() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        // Highlight answers after submission
+        function highlightAnswers() {
+            const questionItems = questionsContainer.querySelectorAll('.question-item');
+            questionItems.forEach(item => {
+                const qNum = item.getAttribute('data-q');
+                const qKey = 'q' + qNum;
+                const correct = correctAnswers[qKey];
+                const selected = document.querySelector(`input[name="${qKey}"]:checked`);
+
+                // Remove previous highlight classes
+                item.classList.remove('correct-highlight', 'wrong-highlight');
+
+                // Add highlight based on correctness
+                if (selected) {
+                    if (selected.value === correct) {
+                        item.classList.add('correct-highlight');
+                    } else {
+                        item.classList.add('wrong-highlight');
+                    }
+                } else {
+                    // Unanswered – mark as wrong (no selection)
+                    item.classList.add('wrong-highlight');
+                }
+            });
+        }
+
+        // Reset highlights and result box
+        function resetQuizVisuals() {
+            const questionItems = questionsContainer.querySelectorAll('.question-item');
+            questionItems.forEach(item => {
+                item.classList.remove('correct-highlight', 'wrong-highlight');
+            });
+            resultBox.classList.remove('show');
+        }
+
+        // Submit handler
+        submitBtn.addEventListener('click', function() {
+            // Calculate score
+            let score = 0;
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qKey = 'q' + i;
+                const selected = document.querySelector(`input[name="${qKey}"]:checked`);
+                if (selected && selected.value === correctAnswers[qKey]) {
+                    score++;
+                }
+            }
+
+            // Highlight answers
+            highlightAnswers();
+
+            // Update result box content
+            scoreDisplay.innerHTML = `${score} <small>/ ${totalQuestions}</small>`;
+
+            // Custom message based on score
+            let message = '';
+            if (score === totalQuestions) {
+                message = '🌟 Perfect! You are a true Gandhi scholar!';
+            } else if (score >= 16) {
+                message = '👏 Excellent! Your knowledge is inspiring.';
+            } else if (score >= 12) {
+                message = '👍 Good effort! Keep learning about the Mahatma.';
+            } else if (score >= 8) {
+                message = '📖 Not bad, but there is room to grow.';
+            } else {
+                message = '💡 Keep exploring the life of Gandhi ji!';
+            }
+            messageDisplay.textContent = message;
+
+            // Generate participation code
+            const code = generateCode();
+            participationCode.textContent = `🎫 Participation Code: ${code}`;
+
+            // Show result box
+            resultBox.classList.add('show');
+
+            // Scroll to result box smoothly
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // Optional: Reset highlights when user changes an answer after submission
+        questionsContainer.addEventListener('change', function(e) {
+            if (e.target.matches('input[type="radio"]')) {
+                if (resultBox.classList.contains('show')) {
+                    resetQuizVisuals();
+                }
+            }
+        });
+
+    })();
+</script>
+
+</body>
+</html>
+  
